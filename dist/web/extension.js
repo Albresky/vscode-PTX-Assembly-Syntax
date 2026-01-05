@@ -1,0 +1,2 @@
+(()=>{"use strict";var e={};(()=>{var t=e;Object.defineProperty(t,"__esModule",{value:!0}),t.activate=function(e){},t.deactivate=function(){}})();var t=exports;for(var r in e)t[r]=e[r];e.__esModule&&Object.defineProperty(t,"__esModule",{value:!0})})();
+//# sourceMappingURL=extension.js.map

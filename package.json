@@ -1,0 +1,84 @@
+{
+  "name": "vscode-ptx-highlighting",
+  "displayName": "PTX Assembly Syntax",
+  "version": "0.0.1",
+  "publisher": "albresky",
+  "description": "Syntax highlighting for NV PTX Assembly",
+  "author": {
+    "name": "Albresky",
+    "email": "shikai@albresky.cn"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/albresky/vscode-ptx-highlighting"
+  },
+  "keywords": [
+    "ptx",
+    "cuda",
+    "assembly",
+    "nvidia"
+  ],
+  "engines": {
+    "vscode": "^1.49.0"
+  },
+  "categories": [
+    "Programming Languages"
+  ],
+  "icon": "images/icon.png",
+  "scripts": {
+    "vscode:prepublish": "npm run package-ext && npm run package-web",
+    "compile": "tsc -p ./",
+    "lint": "eslint src --ext ts",
+    "watch": "webpack --watch --devtool nosources-source-map --info-verbosity verbose --config ./build/extension.webpack.config.js",
+    "package": "vsce package",
+    "package-ext": "webpack --mode production --config ./build/extension.webpack.config.js",
+    "compile-web": "webpack --devtool nosources-source-map --config ./build/web-extension.webpack.config.js",
+    "watch-web": "webpack --watch --devtool nosources-source-map --info-verbosity verbose --config ./build/web-extension.webpack.config.js",
+    "package-web": "webpack --mode production --config ./build/web-extension.webpack.config.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.0",
+    "@types/node": "^14.0.27",
+    "@types/vscode": "^1.49.0",
+    "@typescript-eslint/eslint-plugin": "^8.51.0",
+    "@typescript-eslint/parser": "^8.51.0",
+    "@vscode/vsce": "^3.7.1",
+    "eslint": "^9.39.2",
+    "glob": "^7.1.6",
+    "mocha": "^11.7.5",
+    "ts-loader": "^9.5.4",
+    "typescript": "^5.9.3",
+    "webpack": "^5.104.1",
+    "webpack-cli": "^6.0.1"
+  },
+  "main": "./dist/ext/extension.js",
+  "browser": "./dist/web/extension.js",
+  "activationEvents": [
+    "onLanguage:ptx"
+  ],
+  "contributes": {
+    "languages": [
+      {
+        "id": "ptx",
+        "aliases": [
+          "NV PTX",
+          "ptx",
+          "PTX"
+        ],
+        "extensions": [
+          ".ptx"
+        ],
+        "configuration": "./language-configuration.json"
+      }
+    ],
+    "grammars": [
+      {
+        "language": "ptx",
+        "scopeName": "source.ptx",
+        "path": "./syntaxes/ptx.tmLanguage.json"
+      }
+    ]
+  }
+}
