@@ -135,6 +135,6 @@ jobs:
       - name: Publish to Marketplace
         run: |
           npm install -g @vscode/vsce
-          vsce publish -p ${{ secrets.VSCE_PAT }} --packagePath artifacts/*.vsix
+          vsce publish --packagePath artifacts/*.vsix
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
