@@ -30,21 +30,17 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm install
 
       - name: Compile extension
-        run: yarn run compile
-        env:
-          NODE_OPTIONS: --openssl-legacy-provider
+        run: npm run compile
 
       - name: Package extension
-        env:
-          NODE_OPTIONS: --openssl-legacy-provider
         run: |
-          yarn global add @vscode/vsce
+          npm install -g @vscode/vsce
           
           if [ -n "${{ github.event.inputs.version }}" ]; then
             VERSION="${{ github.event.inputs.version }}"
@@ -55,10 +51,12 @@ jobs:
           echo "Building version: $VERSION"
           echo "VERSION=$VERSION" >> $GITHUB_ENV
           
+          NAME=$(node -p "require('./package.json').name")
+          
           if [ "${{ matrix.target }}" = "universal" ]; then
-            vsce package --out "vscode-ptx-highlighting-${VERSION}.vsix"
+            vsce package --out "${NAME}-${VERSION}.vsix"
           else
-            vsce package --target ${{ matrix.target }} --out "vscode-ptx-highlighting-${VERSION}-${{ matrix.target }}.vsix"
+            vsce package --target ${{ matrix.target }} --out "${NAME}-${VERSION}-${{ matrix.target }}.vsix"
           fi
 
       - name: Upload artifact
@@ -123,10 +121,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '20'
-          cache: 'yarn'
+          cache: 'npm'
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
+        run: npm install
 
       - name: Download universal artifact
         uses: actions/download-artifact@v4
@@ -136,7 +134,7 @@ jobs:
 
       - name: Publish to Marketplace
         run: |
-          yarn global add @vscode/vsce
-          vsce publish -p ${{ secrets.VSCE_PAT }}
+          npm install -g @vscode/vsce
+          vsce publish -p ${{ secrets.VSCE_PAT }} --packagePath artifacts/*.vsix
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
