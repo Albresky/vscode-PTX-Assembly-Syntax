@@ -2,7 +2,7 @@
   "name": "vscode-ptx-highlighting",
   "displayName": "PTX Syntax Highlight",
   "version": "0.0.1",
-  "publisher": "albresky",
+  "publisher": "Albresky",
   "description": "Syntax highlighting for NVIDIA PTX Assembly",
   "author": {
     "name": "Albresky",
