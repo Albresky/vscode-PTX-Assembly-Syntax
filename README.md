@@ -57,11 +57,11 @@ This will generate a `.vsix` file (e.g., `vscode-ptx-0.0.1.vsix`) in the root di
 
 ### From VS Marketplace
 
-TODO
+Download from [Visual Studio | Marketplace](https://marketplace.visualstudio.com/items?itemName=Albresky.vscode-ptx-highlighting)
 
 ### From VSIX
 
-1. Build the package using the instructions above.
+1. Build the package using the instructions above or **download `.vsix` from [release page](https://github.com/Albresky/vscode-PTX-Assembly-Syntax/releases)**.
 2. Open VS Code.
 3. Go to the Extensions view (Ctrl+Shift+X).
 4. Click on the "..." (Views and More Actions) menu in the top right corner.
